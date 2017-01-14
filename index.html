@@ -13,6 +13,14 @@
 	/*animate in on load*/
 	$(document).ready(function() {
 		$('ul.shelf > li.shelf-item').animate({ top: 0, left: 0	}, 700, "easeOutBounce");
+		/*set up hover effect*/
+		$('ul-shelf > li.shelf-item').hover(
+			/*the first function happens on mouse in, the second on mouse out
+			mouse in animates the bottom up to 0, mouse out sends back to original position
+			select the element that this is happening to's (this) children that have the class meta*/
+			function() { $(this).children(".meta").stop().animate({ bottom: 0 }) },
+			function() { $(this).children(".meta").stop().animate({ bottom: -22 }) }
+		);
 	});
 
 		</script>
