@@ -4,14 +4,16 @@
 		<meta charset="UTF-8">
 		<title>jQuery :: Lesson 2 Product Shelf</title>
 
-		<!-- Tip: Start src & href links with no slash for relative paths. -->
 		<script src="jquery.1.9.1.js"></script>
 		<script src="jquery.easing.min.js"></script>
 		<link rel="stylesheet" href="style.css"/>
 
 		<script type="text/javascript">
-
-		// Your code goes here.
+	/*pass jquery function so page loads properly*/
+	/*animate in on load*/
+	$(document).ready(function() {
+		$('ul.shelf > li.shelf-item').animate({ top: 0, left: 0	}, 700, "easeOutBounce");
+	});
 
 		</script>
 
