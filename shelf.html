@@ -17,7 +17,11 @@ $(document).ready(function() {
 		var $carousel = $('.carousel-wrapper'); /*set up variable of 'carousel-wrapper' class because we will be accesing it a lot*/
 	//set up carousel
 	$carousel.cycle({
-		 fx:'scrollHorz' /*cycle through pictures left to right*/
+		 fx:'scrollHorz', /*cycle through pictures left to right*/
+		 height: $carousel.height(),
+		 width: $carousel.width(),
+		 fit: true,
+		 speed: 400
 	 }).cycle('pause'); /*pause cycle to prevent it from moving carousel*/
 
 	 //set up user scroll buttons
@@ -27,7 +31,7 @@ $(document).ready(function() {
 	 });
 
 	 $('.nav-arrow-right').click(function() {
-		 $carousel.cycle('next'); 
+		 $carousel.cycle('next');
 	 });
 
 
