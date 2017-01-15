@@ -5,6 +5,10 @@ body {
 
 h1 {
 	text-align: center;
+	color: white;
+	font-family: Futura;
+	font-size: 80px;
+	border-bottom: 2px solid white;
 }
 
 .shelf-wrapper {

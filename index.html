@@ -4,9 +4,9 @@
 		<meta charset="UTF-8">
 		<title>jQuery :: Lesson 2 Product Shelf</title>
 
-		<script src="jquery.1.9.1.js"></script>
-		<script src="jquery.easing.min.js"></script>
-		<link rel="stylesheet" href="style.css"/>
+		<script src="js/jquery.1.9.1.js"></script>
+		<script src="js/jquery.easing.min.js"></script>
+		<link rel="stylesheet" href="css/style.css"/>
 
 		<script type="text/javascript">
 	/*pass jquery function so page loads properly*/
@@ -14,23 +14,30 @@
 	$(document).ready(function() {
 		$('ul.shelf > li.shelf-item').animate({ top: 0, left: 0	}, 700, "easeOutBounce");
 		/*set up hover effect*/
-		$('ul-shelf > li.shelf-item').hover(
-			/*the first function happens on mouse in, the second on mouse out
-			mouse in animates the bottom up to 0, mouse out sends back to original position
-			select the element that this is happening to's (this) children that have the class meta*/
-			function() { $(this).children(".meta").stop().animate({ bottom: 0 }) },
-			function() { $(this).children(".meta").stop().animate({ bottom: -22 }) }
-		);
-	});
+	// 	$('ul-shelf > li').hover(
+	// 		/*the first function happens on mouse in, the second on mouse out
+	// 		mouse in animates the bottom up to 0, mouse out sends back to original position
+	// 		select the element that this is happening to's (this) children that have the class meta*/
+	// 		function() { $(this).children(".meta").stop().animate({ bottom: 0 }, 250) },
+	// 		function() { $(this).children(".meta").stop().animate({ bottom: -22 }, 100) }
+	// 	)
+	// });
+
+	$('ul.shelf > li').hover(
+		function() { $(this).children('.meta').stop().animate({ bottom: 0 }, 250) },
+		function() { $(this).children('.meta').stop().animate({ bottom: -22 }, 100) }
+	)
+
+});
 
 		</script>
 
 	</head>
 
 	<body>
-		<h1>The Poster Store</h1>
+		<h1>Stupid Flowers</h1>
 		<div class="shelf-wrapper">
-			<h2 class="category">Flowers</h2>
+			<h2 class="category">Flowers: Dumb Ones</h2>
 			<ul class="shelf" id="shelf-flowers">
 				<li class="shelf-item" id="shelf-item-0">
 					<div class="meta">In Stock - $14.95</div>
