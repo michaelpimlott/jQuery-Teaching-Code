@@ -14,10 +14,21 @@
 		<script type="text/javascript">
 
 $(document).ready(function() {
+		var $carousel = $('.carousel-wrapper'); /*set up variable of 'carousel-wrapper' class because we will be accesing it a lot*/
 	//set up carousel
-	$('.carousel-wrapper').cycle({
+	$carousel.cycle({
 		 fx:'scrollHorz' /*cycle through pictures left to right*/
 	 }).cycle('pause'); /*pause cycle to prevent it from moving carousel*/
+
+	 //set up user scroll buttons
+
+	 $('.nav-arrow-left').click(function() {
+		 $carousel.cycle('prev'); /*on click give the carousel the command from the plugins docs*/
+	 });
+
+	 $('.nav-arrow-right').click(function() {
+		 $carousel.cycle('next'); 
+	 });
 
 
 	// Animate in.
