@@ -1,0 +1,29 @@
+
+/*tabs___------------___________-------________-------_______------*/
+
+#categories h3 { /*1)float the headers next to each other*/
+	float:left;
+	padding: 4px;
+	margin-right: 3px;
+	border: 1px solid #34AADC;
+	border-bottom-width: 0px; /*hide bottom border*/
+	background-color: #eee;
+	cursor: pointer;
+}
+
+#categories h3.active {
+	background-color: white;
+
+}
+
+#categories ul { /* 2)hide the content elements(the ul's)*/
+	display: none;
+	position: absolute;
+	margin-top: 35px;
+	border: 1px solid #34AADC;
+	width: 240px;
+}
+
+#categories ul.active {
+	display:block;/*unhide content elements*/
+}

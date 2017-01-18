@@ -8,6 +8,59 @@
 
     <script src="js/jquery.1.9.1.js"></script>
 
+		<script>
+		/*making static tabs dynamic with jQuery*/
+		/*1)by default we want the first tab to be visable
+		so we need an easy way to get the first matching element from the list*/
+		/*2)to be dynamic we need classes coming on and off elements*/
+		/*3)we need to know when the user clicks on a tab*/
+		/*4)we will also need a special styiling for the last tab*/
+			$(document).ready(function() {
+				var $tabs = $("#categories > h3"), /*select the tabs by choosing all the immediate children of h3 which are immediate children of the categories element*/
+						$contents = $("#categories > ul");/*all the immediete children of ul's in the categories element*/
+
+						// $($tabs[0]).click(function() { /*set up click handler by getting the 0th element of the tabs object*/
+						// 		$tabs.removeClass('active');	/*on click remove the active class from all tabs*/
+						// 		$($tabs[0]).addClass('active');/*take the 0th element out and add the active class back to it*/
+						// 		$contents.removeClass('active');	/*then we do the same with the contents*/
+						// 		$($contents[0]).addClass('active');
+						// });
+						// /*we update it three times, one for each tab*/
+						// $($tabs[1]).click(function() { /*set up click handler by getting the 0th element of the tabs object*/
+						// 		$tabs.removeClass('active');	/*on click remove the active class from all tabs*/
+						// 		$($tabs[1]).addClass('active');/*take the 0th element out and add the active class back to it*/
+						// 		$contents.removeClass('active');	/*then we do the same with the contents*/
+						// 		$($contents[1]).addClass('active');
+						// });
+						// $($tabs[2]).click(function() { /*set up click handler by getting the 0th element of the tabs object*/
+						// 		$tabs.removeClass('active');	/*on click remove the active class from all tabs*/
+						// 		$($tabs[2]).addClass('active');/*take the 0th element out and add the active class back to it*/
+						// 		$contents.removeClass('active');	/*then we do the same with the contents*/
+						// 		$($contents[2]).addClass('active');
+						// });
+
+						//replace repetitive code using the each method
+						$tabs.each(function(i, tab) { /*we are adding click handlers to the tabs themselves so that is the element we select*/
+							var $tab = $(tab),
+									$content = $($contents[i]);/*jquery gives you the raw html element, not a jquery object
+								 													so the first thing we do is wrap it in jquery */
+									$tab.click(function() {
+										$tabs.removeClass('active');
+										$tab.addClass('active');
+										$contents.removeClass('active');
+										$content.addClass('active');
+
+									})/*now we do the same thing from the other functions*/
+						})
+
+						//set initial state
+						$tabs.first().addClass('active'); /*get first tab and make it active*/
+						$contents.first().addClass('active');
+					});
+
+
+		</script>
+
 	</head>
 
 	<body lang="en">
@@ -17,8 +70,8 @@
 		<aside class="sidebar-right">
 			<div id="categories">
 				<h2>Styles &amp; Categories</h2>
-				<h3 class='active'>Nature</h3>
-				<ul class="active">
+				<h3>Nature</h3>
+				<ul>
 					<li>Landscapes</li>
 					<li>Seasons</li>
 					<li>Floral &amp; Botanical</li>
