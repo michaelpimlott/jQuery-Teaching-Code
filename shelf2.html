@@ -5,9 +5,12 @@
 		<title>jQuery :: Lesson 5 :: User Events</title>
 
 		<!-- Tip: Start src & href links with no slash for relative paths. -->
-		<script src="script/jquery.1.9.1.js"></script>
-		<script src="script/jquery.easing.min.js"></script>
-		<script src="script/jquery.cycle.all.js"></script>
+		<script src="js/jquery.1.9.1.js"></script>
+		<script src="js/jquery.easing.min.js"></script>
+		<script src="js/jquery.cycle.all.js"></script>
+		<script src ="js/jquery-ui-1.10.3.custom.min.js">
+
+		</script>
 
 		<link rel="stylesheet" href="css/shelf2.css"/>
 
@@ -35,11 +38,24 @@ $(document).ready(function() {
 	// Animate in.
 	$('ul.shelf > li').animate({ top: 0, left: 0 }, 700, 'easeOutBounce');
 
-	// Set up hover effect.
+	// Set up hover effect and click handler.
 	$('ul.shelf > li').hover(
 		function() { $(this).children('.meta').stop().animate({ bottom: 0 }, 250) },
 		function() { $(this).children('.meta').stop().animate({ bottom: -22 }, 100) }
-	)
+	).click(function() {
+		var img = $(this).css("background-image"); /*get the image*/
+		$('#customize-poster').css("background-image", img); /*set the image*/
+		$('#customize-pane-wrapper').css("display", "block");/*set the display to block, overiding 'none' so it shows up*/
+});
+//initial setup on customization pane
+
+$(".customize-poster-caption").draggable({ containment: "parent" });
+$(".customize-caption-input").on("propertychange input", function() { /*set up handler for property change and 'input' for people using >= ie9*/
+	var val = this.value, /*we get the value of the raw element (this)*/
+			index = $(this).data("index"); /*then we wrap the element in (this) to get jquerys data function and grab 'index' out of the data attribute*/
+			if(val && val.length > 100) val = this.value = val.substr(0, 100);	/*validate that the caption is less than 100 charachters*/
+			$("#customize-poster-caption-" + index).text(val);
+});
 
 });
 
@@ -103,17 +119,17 @@ $(document).ready(function() {
 					<div id="customize-captions">
 						<div class="customize-caption" id="customize-caption-1">
 							<div class="customize-label">Caption:</div>
-							<textarea class="customize-caption-input"></textarea>
+							<textarea data-index=1 class="customize-caption-input"></textarea>
 						</div>
 					</div>
 					<button id="add-caption-button">+ Add caption</button>
 					<div id="customize-length-warning">Max 100 characters per caption.</div>
 				</div>
 				<div id="customize-poster">
-					<div class="customize-poster-caption walter-white" id="customize-poster-caption-1">Test Caption.</div>
+					<div class="customize-poster-caption walter-white" id="customize-poster-caption-1"></div>
 				</div>
 			</div>
 		</div>
-		<div id="footer">&copy;2013 Gymnasium Posters Inc.</div>
+		<div id="footer">&copy;2013</div>
 	</body>
 </html>
