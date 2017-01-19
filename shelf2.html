@@ -57,6 +57,22 @@ $(".customize-caption-input").on("propertychange input", function() { /*set up h
 			$("#customize-poster-caption-" + index).text(val);
 });
 
+/* set up new caption button */
+$("#add-caption-button").click(function() {
+	var $caption = $(".customize-caption").last().clone(true), /*grab the last caption and clone it and pass in a true to indicate we also want to copy the event handlers and data if there was any*/
+			$textarea = $caption.find("textarea"),/*get the text area out of the caption we just cloned and get its index*/
+			index = $textarea.data("index") + 1;/*increment the index by giving it a plus 1*/
+			$textarea.data('index', index);/*set the index to be our new index*/
+			$textarea.val(null);/*null out the closed caption*/
+			$caption.appendTo("#customize-captions");/*take that caption and append it to the custom caption container*/
+			var $posterCaption = $(".customize-poster-caption").clone(false);/*get the caption from the poster too and then clone it (in this case we don't want the event handlers and data because it breaks the draggable plugin)*/
+			$posterCaption.attr("id", "customize-poster-caption-" + index);/*now we need to incrament the captions id using the index we already have so that the textareas event handler has a way to find it*/
+			$posterCaption.text('');/*then we clear out it's text*/
+			$posterCaption.css("top", 0).css("left", 0);/*reset it's position at the top*/
+			$posterCaption.appendTo("#customize-poster");/*now we append it to the poster itself*/
+			$posterCaption.draggable({ containment: "parent"});/*make it draggable as well*/
+});
+
 });
 
 		</script>
