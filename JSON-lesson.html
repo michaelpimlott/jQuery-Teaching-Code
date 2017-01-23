@@ -5,10 +5,10 @@
 		<title>jQuery :: Lesson 6 :: AJAX</title>
 
 		<!-- Tip: Start src & href links with no slash for relative paths. -->
-		<script src="script/jquery.1.9.1.js"></script>
-		<script src="script/jquery.easing.min.js"></script>
-		<script src="script/jquery.cycle.all.js"></script>
-		<script src="script/jquery-ui-1.10.3.custom.min.js"></script>
+		<script src="js/jquery.1.9.1.js"></script>
+		<script src="js/jquery.easing.min.js"></script>
+		<script src="js/jquery.cycle.all.js"></script>
+		<script src="js/jquery-ui-1.10.3.custom.min.js"></script>
 
 		<link rel="stylesheet" href="./css/JSON-lesson.css"/>
 
@@ -17,7 +17,45 @@
 var shelfTemplate = '<ul class="shelf">%{shelf}</ul>',
     posterTemplate = '<li class="shelf-item shelf-position-%{position}" style="background-image: url(\'%{imageUrl}\')"><div class="meta">%{inStock} - %{price}</div></li>';
 
-$(document).ready(function() {
+//We create two flags, one to note when the page is loaded, one to note when the data is loaded
+//we will also have to store our poster data
+
+var pageDidLoad;
+var posterDataDidLoad;
+var posterData;
+
+$(document).ready(function() { /*now this says, okay the page is loaded*/
+	pageDidLoad = true; /*then we check to see if both things happened*/
+	if(pageDidLoad && posterDataDidLoad) processPosterData();
+});
+
+$.ajax({/*we need to load the data so we trigger that with an ajax call*/
+	url: 'data/flowers.json',
+	dataType: 'json',
+	success: function(result) { /*success function saves the results and mark the poster as loaded*/
+		posterData = result;
+		posterDataDidLoad = true;
+		if(pageDidLoad && posterDataDidLoad) processPosterData();/*we use the exact same check as before*/
+	}
+});
+function processPosterData() {
+	//process a posterTemplate for each poster
+	var posterHtmls = [];/*we need a place to store each generated poster item as we go*/
+	posterData.forEach(function(poster, i) { /*use for loop to go through the array, for each gives you the item as well as the number in the array*/
+	var posterHtml = posterTemplate;/*genertate poster HTML, one for each poster*/
+	//now that we have the template so we want to start filling it out. the first item in the template is the shelf position (0-5)
+	//position 0-5
+	posterHtml = posterHtml.replace('%{position}', i % 6);
+	//image URL
+	posterHtml = posterHtml.replace('%{imageUrl}', poster.imageUrl);
+	//in stock
+});
+
+	//process a shelfTemplate for groups of six posters
+
+	//drop the shelf HTML into the element
+
+	//update the carousel's title
 	// Set up our carousel.
 	var $carousel = $('.carousel-wrapper');
 	$carousel.cycle({
@@ -77,7 +115,7 @@ $(document).ready(function() {
 		$(this).css('display', 'none');
 	});
 
-});
+};
 
 		</script>
 
