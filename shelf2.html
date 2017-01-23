@@ -89,7 +89,11 @@
 					containment: "parent"
 				}); /*make it draggable as well*/
 
-				  	
+				//set up click to close
+				$("#customize-pane-wrapper").click(function(evt) { /*get the wrapper div*/
+					if(evt.target !== this) return; /*check if current object was target of the click*/	
+					$(this).css("display", "none"); /*make the pane-wrapper display: none on click*/
+				});
 			});
 
 		});
