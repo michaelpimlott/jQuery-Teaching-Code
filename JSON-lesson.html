@@ -49,13 +49,33 @@ function processPosterData() {
 	//image URL
 	posterHtml = posterHtml.replace('%{imageUrl}', poster.imageUrl);
 	//in stock
+	posterHtml = posterHtml.replace('%{inStock}', poster.inStock ? 'In Stock' : 'Sold Out');/*in stock comes as a true or false value, but we don't want that so we use an inline conditional*/
+	//price
+	posterHtml = posterHtml.replcae('%{price}', poster.price);
+	//save
+	posterHtmls.push(posterHtml); /*push onto posterHtmls array*/
 });
 
 	//process a shelfTemplate for groups of six posters
 
-	//drop the shelf HTML into the element
+	var postersHtml = '';
+	var shelfHtml;
+	var shelfHtmls = [];
+	for(var i = 0; i < posterHtmls.length; i++) { /*posterHtmls are the filled out poster templates*/
+		postersHtml += posterHtmls[i];/*we tack them together one at a time*/
+		if(i % 6 === 5) {/*if we are on the last item of a shelf (the 6th, or if i % 6 = 5) we do some extra proccessing*/
+		shelfHtml = shelfTemplate.replace('%{shelf}', postersHtml); /*get a shelf template, replace a shelf placeholder with a list of posters, push that shelf item onto our array of shelfs*/
+		shelfHtmls.push(shelfHtml);
+		//reset postersHtml for new shelf
+		postersHtml = '';
+		}
+}
 
+	//drop the shelf HTML into the element
+	$('.carousel-wrapper').html(shelfHtmls.join('')); /*join with an empty string because otherwise it joins with a comma*/
 	//update the carousel's title
+	$('.category').text(posterData[0].category);
+
 	// Set up our carousel.
 	var $carousel = $('.carousel-wrapper');
 	$carousel.cycle({
